@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script>
+    const root = document.getElementById("root");
+    const h3 = document.createElement("h3", null, "Hello!!!!"); //element 생성
+    const btn = document.createElement(
+      "button",
+      {
+        onClick: () => console.log("i'm button"),
+      },
+      "Click me"
+    ); //element 생성 => event를 준다
+    const container = document.createElement("div", null, [h3, btn]);
+    ReactDOM.render(container, root); //react-dom을 이용하여 화면에 span을 div에 노출시킨다.
+  </script>
+</html>
