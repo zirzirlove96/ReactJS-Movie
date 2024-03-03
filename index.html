@@ -9,9 +9,9 @@
   <script type="text/babel">
     const root = document.getElementById("root");
     const h3 = document.createElement("h3", null, "Hello!!!!"); //element 생성
-    const Button = () => (
+    /*const Button = () => (
       <button onClick={() => console.log("i'm button")}>Click me</button>
-    );
+    );*/
     /*const btn = document.createElement(
       "button",
       {
@@ -19,9 +19,14 @@
       },
       "Click me"
     ); //element 생성 => event를 준다*/
+    let counter = 0;
+    const coutUp = () => {
+      counter = counter + 1;
+    }; //jsx  방식
     const Container = () => (
       <div>
-        <Button />
+        <h3>Total clicks : {counter}</h3>
+        <button onClick={coutUp}>Click me</button>
       </div>
     );
     ReactDOM.render(<Container />, root); //react-dom을 이용하여 화면에 span을 div에 노출시킨다.
