@@ -19,16 +19,26 @@
       },
       "Click me"
     ); //element 생성 => event를 준다*/
-    let counter = 0;
+    /*let counter = 0;
     const coutUp = () => {
-      counter = counter + 1;
-    }; //jsx  방식
-    const Container = () => (
-      <div>
-        <h3>Total clicks : {counter}</h3>
-        <button onClick={coutUp}>Click me</button>
-      </div>
-    );
-    ReactDOM.render(<Container />, root); //react-dom을 이용하여 화면에 span을 div에 노출시킨다.
+      setCoutner(counter + 1);
+    }; //jsx  방식*/
+    const App = () => {
+      const [counter, setCoutner] = React.useState(0);
+      const countUp = (event) => {
+        if (event.target == "button") {
+          //ReactDOM.redner를 부르지 않고 리렌더링 하는 방법
+          //setCoutner(counter + 1);  //직접 설정
+          setCoutner((current) => current + 1); //[현재] 상태 값으로 계산하기 위해서는 current를 사용
+        }
+      };
+      return (
+        <div>
+          <h3>Total clicks : {counter}</h3>
+          <button onClick={countUp}>Click me</button>
+        </div>
+      );
+    };
+    ReactDOM.render(<App />, root); //react-dom을 이용하여 화면에 span을 div에 노출시킨다.
   </script>
 </html>
