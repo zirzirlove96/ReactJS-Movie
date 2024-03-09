@@ -24,18 +24,30 @@
       setCoutner(counter + 1);
     }; //jsx  방식*/
     const App = () => {
-      const [counter, setCoutner] = React.useState(0);
-      const countUp = (event) => {
-        if (event.target == "button") {
+      const [change, setChange] = React.useState(0);
+      const ChangeTime = (event) => {
+        if (event.target.id == "minutes") {
           //ReactDOM.redner를 부르지 않고 리렌더링 하는 방법
           //setCoutner(counter + 1);  //직접 설정
-          setCoutner((current) => current + 1); //[현재] 상태 값으로 계산하기 위해서는 current를 사용
+          setChange((current) => current / 60); //[현재] 상태 값으로 계산하기 위해서는 current를 사용
         }
       };
       return (
         <div>
-          <h3>Total clicks : {counter}</h3>
-          <button onClick={countUp}>Click me</button>
+          <label for="minutes">Minutes</label>
+          <input
+            type="number"
+            id="minutes"
+            placeholder="Minutes"
+            onChnage={ChangeTime}
+          ></input>
+          <label for="hours">Hours</label>
+          <input
+            type="number"
+            id="hours"
+            placeholder="Hours"
+            value={change}
+          ></input>
         </div>
       );
     };
