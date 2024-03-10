@@ -8,7 +8,7 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    const h3 = document.createElement("h3", null, "Hello!!!!"); //element 생성
+    //const h3 = document.createElement("h3", null, "Hello!!!!"); //element 생성
     /*const Button = () => (
       <button onClick={() => console.log("i'm button")}>Click me</button>
     );*/
@@ -23,14 +23,19 @@
     const coutUp = () => {
       setCoutner(counter + 1);
     }; //jsx  방식*/
-    const App = () => {
+    const MinuteToHours = () => {
       const [change, setChange] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
       const ChangeTime = (event) => {
-        if (event.target.id == "minutes") {
-          //ReactDOM.redner를 부르지 않고 리렌더링 하는 방법
-          //setCoutner(counter + 1);  //직접 설정
-          setChange((current) => current / 60); //[현재] 상태 값으로 계산하기 위해서는 current를 사용
-        }
+        //ReactDOM.redner를 부르지 않고 리렌더링 하는 방법
+        setChange(event.target.value); //[현재] 상태 값으로 계산하기 위해서는 current를 사용
+      };
+      const reset = () => {
+        setChange(0);
+      };
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
       };
       return (
         <div>
@@ -40,14 +45,43 @@
             id="minutes"
             placeholder="Minutes"
             onChnage={ChangeTime}
+            value={change}
+            disabled={flipped ? change * 60 : change}
           ></input>
           <label for="hours">Hours</label>
           <input
             type="number"
             id="hours"
             placeholder="Hours"
-            value={change}
+            value={flipped ? change : Math.round(change / 60)}
+            disabled={!flipped}
+            onChnage={ChangeTime}
           ></input>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>{flipped ? "Turn back" : "Invert"}</button>
+        </div>
+      );
+    };
+    const KmToMiles = () => {
+      return <h3>KM 2 M</h3>;
+    };
+    const App = () => {
+      const [index, setIndex] = React.useState(0);
+      const onSelect = (event) => {
+        if (event.target.value == "1") {
+          setIndex(1);
+        } else {
+          setIndex(2);
+        }
+      };
+      return (
+        <div>
+          <h1>Super Converter11</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="1">MinutesToHours</option>
+            <option value="2">KmToMiles</option>
+          </select>
+          {index == 1 ? <MinuteToHours /> : index == 2 ? <KmToMiles /> : null}
         </div>
       );
     };
