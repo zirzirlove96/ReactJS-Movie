@@ -7,15 +7,25 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    const Btn = ({ value, style }) => {
-      return <button style={style}>{value}</button>;
+    const Btn = ({ value, style, onClick }) => {
+      console.log(value);
+      return (
+        <button style={style} onClick={onClick}>
+          {value}
+        </button>
+      );
     };
+    const MemoReact = React.memo(Btn); //이벤트가 발생하지 않는 함수에 한해 리렌더링 X
     //부모에서 자식에게 props 넘겨주기
     const App = () => {
+      const [value, setValue] = React.useState("Save Button");
+      const onClick = () => {
+        setValue("Revert Changes");
+      };
       return (
         <div>
-          <Btn
-            value="Save Changes"
+          <MemoReact
+            value={value}
             style={{
               backgroundColor: "tomato",
               colocr: "white",
@@ -23,7 +33,9 @@
               border: 0,
               borderRadius: 10,
             }}
+            onClick={onClick}
           />
+          <MemoReact value="Convert Button" />
         </div>
       );
     };
