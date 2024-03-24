@@ -4,8 +4,10 @@ import Button from "./Button";
 function App() {
   const [counter, setCounter] = useState(0);
   const [keyword, setKeyword] = useState("");
+  const [showing, setShowing] = useState(false);
   const onClick = () => {
     setCounter((prev) => prev + 1);
+    setShowing((prev) => !prev);
   };
   const onChange = (event) => {
     setKeyword(event.target.value);
@@ -32,7 +34,7 @@ function App() {
       <h1>Welcome back to React</h1>
       <input type="text" onChange={onChange} />
       <h2>{counter}</h2>
-      <Button text="btn" onClick={onClick}></Button>
+      {showing ? null : <Button text="btn" onClick={onClick} />}
     </div>
   );
 }
