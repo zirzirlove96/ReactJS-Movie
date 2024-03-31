@@ -14,14 +14,18 @@ function App() {
     setToDos((currentArray) => [toDo, ...currentArray]);
     setTodo("");
   };
-  console.log(toDos);
   return (
     <div>
       <h1>My To Dos</h1>
       <form onSubmit={onSubmit}>
-        <input type="text" onChange={onChange}></input>
+        <input type="text" onChange={onChange} value={toDo}></input>
         <button>Add To Do</button>
       </form>
+      <ul>
+        {toDos.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
